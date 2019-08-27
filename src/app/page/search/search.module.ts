@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SearchTodoPage } from './search-todo.page';
+import { SearchPage } from './search.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: SearchTodoPage
+    component: SearchPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SearchTodoPage]
+  declarations: [SearchPage]
 })
-export class SearchTodoPageModule {}
+export class SearchPageModule {}

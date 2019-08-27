@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KanbanTodoPage } from './kanban-todo.page';
+import { KanbanPage } from './kanban.page';
 
-describe('KanbanTodoPage', () => {
-  let component: KanbanTodoPage;
-  let fixture: ComponentFixture<KanbanTodoPage>;
+describe('KanbanPage', () => {
+  let component: KanbanPage;
+  let fixture: ComponentFixture<KanbanPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KanbanTodoPage ],
+      declarations: [ KanbanPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KanbanTodoPage);
+    fixture = TestBed.createComponent(KanbanPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

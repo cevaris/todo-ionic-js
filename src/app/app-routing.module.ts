@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'kanban', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
-  { path: 'search', loadChildren: './search-todo/search-todo.module#SearchTodoPageModule' },
-  { path: 'kanban', loadChildren: './kanban-todo/kanban-todo.module#KanbanTodoPageModule' },
+  { path: 'kanban', loadChildren: './page/kanban/kanban.module#KanbanPageModule' },
+  { path: 'search', loadChildren: './page/search/search.module#SearchPageModule' },
 ];
 
 @NgModule({

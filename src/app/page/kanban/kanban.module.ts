@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { KanbanTodoPage } from './kanban-todo.page';
+import { KanbanPage } from './kanban.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: KanbanTodoPage
+    component: KanbanPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [KanbanTodoPage]
+  declarations: [KanbanPage]
 })
-export class KanbanTodoPageModule {}
+export class KanbanPageModule {}
