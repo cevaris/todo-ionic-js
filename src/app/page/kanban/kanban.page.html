@@ -1,9 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>kanban</ion-title>
+    <ion-title>Kanban</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-list padding *ngFor="let card of kanbanCards">
+    <ion-item (click)="viewItem(card)">
+      {{card.title}}
+      <p>{{card.description}}</p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
