@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { KanbanPage } from './kanban.page';
+import { KanbanCardComponent } from 'src/app/shared/kanban-card/kanban-card.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [KanbanPage]
+  declarations: [KanbanPage, KanbanCardComponent]
 })
 export class KanbanPageModule {}

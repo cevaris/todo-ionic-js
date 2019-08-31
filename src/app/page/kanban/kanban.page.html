@@ -16,7 +16,7 @@
         <h1>Todo</h1>
         <ion-list>
           <ion-item *ngFor="let card of cardsTodo">
-            {{card.title}}
+            <app-kanban-card [card]="card"></app-kanban-card>
           </ion-item>
         </ion-list>
       </div>
@@ -28,7 +28,7 @@
         <h1>In Progress</h1>
         <ion-list>
           <ion-item *ngFor="let card of cardsInProgress">
-            {{card.title}}
+            <app-kanban-card [card]="card"></app-kanban-card>
           </ion-item>
         </ion-list>
       </div>
@@ -40,7 +40,7 @@
         <h1>Complete</h1>
         <ion-list>
           <ion-item *ngFor="let card of cardsComplete">
-            {{card.title}}
+            <app-kanban-card [card]="card"></app-kanban-card>
           </ion-item>
         </ion-list>
       </div>
