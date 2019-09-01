@@ -17,7 +17,7 @@ export class KanbanCardComponent implements OnInit {
   ngOnInit() { }
 
   async presentDetailModal() {
-    console.log('presenting');
+    console.log('presenting', this.card.title);
     const modal = await this.modalController.create({
       component: KanbanCardDetailPage,
       componentProps: {
