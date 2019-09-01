@@ -9,14 +9,25 @@
   </ion-header>
 
   <ion-content *ngIf="card">
+    <ion-select id="field-state" (ionBlur)="save($event)" value={{card.state}}
+      interface="action-sheet">
+      <ion-select-option value="todo">Todo</ion-select-option>
+      <ion-select-option value="in-progress">In Progress
+      </ion-select-option>
+      <ion-select-option value="complete">Complete</ion-select-option>
+    </ion-select>
+
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{card.title}}</ion-card-title>
-        <ion-card-subtitle>{{card.state}}</ion-card-subtitle>
+        <ion-card-title>
+          <ion-textarea autoGrow id="field-title" (ionBlur)="save($event)" value="{{card.title}}">
+          </ion-textarea>
+        </ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        {{card.description}}
+        <ion-textarea autoGrow id="field-description" (ionBlur)="save($event)" value="{{card.description}}">
+        </ion-textarea>
       </ion-card-content>
     </ion-card>
   </ion-content>

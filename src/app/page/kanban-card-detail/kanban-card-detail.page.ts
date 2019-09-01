@@ -19,10 +19,29 @@ export class KanbanCardDetailPage implements OnInit {
   ngOnInit() {
   }
 
-  dismiss() {
+  dismiss(event) {
+    this.save(event);
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  save(event: any) {
+    const newValue = event.target.value;
+    switch (event.target.id) {
+      case 'field-title':
+        this.card.title = newValue;
+        break;
+      case 'field-description':
+        this.card.description = newValue;
+        break;
+      case 'field-state':
+        this.card.state = newValue;
+        break;
+      default:
+        break;
+    }
+    console.log('saving', this.card);
   }
 
 }
