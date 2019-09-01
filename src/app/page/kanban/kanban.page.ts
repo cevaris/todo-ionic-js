@@ -11,7 +11,10 @@ export class KanbanPage implements OnInit {
   cardsTodo: KanbanCard[] = [
     new KanbanCard('Ipsum anim ea duis dolore ut consequat exercitation sit ipsum.'),
     new KanbanCard('Sunt eiusmod ex officia laboris sunt eu amet velit minim ullamco in.'),
-    new KanbanCard('Mollit labore consectetur minim sunt mollit exercitation velit commodo nisi minim aliquip amet in.')
+    new KanbanCard('Mollit labore consectetur minim sunt mollit exercitation velit commodo nisi minim aliquip amet in.'),
+    new KanbanCard('Lorem mollit ut est aliqua officia sunt officia eu anim.'),
+    new KanbanCard('Esse pariatur excepteur nostrud non excepteur sunt dolore consectetur aliqua.'),
+    new KanbanCard('Duis pariatur id commodo consectetur.')
   ];
 
   cardsInProgress = [
