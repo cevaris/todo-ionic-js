@@ -1,5 +1,5 @@
 <div *ngIf="card">
-  <ion-card>
+  <ion-card (click)="presentDetailModal()">
     <ion-card-content>
       {{card.title}}
     </ion-card-content>

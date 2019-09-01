@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'kanban', loadChildren: './page/kanban/kanban.module#KanbanPageModule' },
   { path: 'search', loadChildren: './page/search/search.module#SearchPageModule' },
+  { path: 'kanban-card-detail', loadChildren: './page/kanban-card-detail/kanban-card-detail.module#KanbanCardDetailPageModule' },
 ];
 
 @NgModule({
