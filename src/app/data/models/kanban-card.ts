@@ -4,6 +4,14 @@ enum KanbanState {
     COMPLETE = 'complete'
 }
 
+export function kanbanStateFromString(str: string): KanbanState {
+    const type = KanbanState[str];
+    if (type === undefined) {
+        throw Error(`${str} not enum not found`)
+    }
+    return type;
+}
+
 export interface IKanbanCard {
     title: String
     description: String

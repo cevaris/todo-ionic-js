@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { KanbanCard } from 'src/app/data/models/kanban-card';
+import { KanbanCard, kanbanStateFromString } from 'src/app/data/models/kanban-card';
 import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
@@ -19,16 +19,17 @@ export class KanbanCardDetailPage implements OnInit {
   ngOnInit() {
   }
 
-  dismiss(event) {
-    this.save(event);
+  dismiss() {
+    console.log('saving', this.card);
     this.modalController.dismiss({
       'dismissed': true
     });
   }
 
-  save(event: any) {
-    const newValue = event.target.value;
-    switch (event.target.id) {
+  updateCardByTarget(target: HTMLTextAreaElement | HTMLInputElement) {
+    const newValue = target.value;
+
+    switch (target.id) {
       case 'field-title':
         this.card.title = newValue;
         break;
@@ -36,11 +37,12 @@ export class KanbanCardDetailPage implements OnInit {
         this.card.description = newValue;
         break;
       case 'field-state':
-        this.card.state = newValue;
+        this.card.state = kanbanStateFromString(newValue);
         break;
       default:
         break;
     }
+    
     console.log('saving', this.card);
   }
 
