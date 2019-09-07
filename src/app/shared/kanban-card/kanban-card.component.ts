@@ -17,14 +17,15 @@ export class KanbanCardComponent implements OnInit {
   ngOnInit() { }
 
   async presentDetailModal() {
-    console.log('presenting', this.card.title);
-    const modal = await this.modalController.create({
-      component: KanbanCardDetailPage,
-      componentProps: {
-        'card': this.card
-      }
-    });
-    return await modal.present();
+    const modal: HTMLIonModalElement =
+      await this.modalController.create({
+        component: KanbanCardDetailPage,
+        componentProps: {
+          'card': this.card
+        }
+      });
+
+    await modal.present();
   }
 
 }

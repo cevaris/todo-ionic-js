@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { KanbanCard } from 'src/app/data/models/kanban-card';
+import { KanbanCard, KanbanState } from 'src/app/data/models/kanban-card';
 
 @Component({
   selector: 'app-kanban',
@@ -18,9 +18,9 @@ export class KanbanPage implements OnInit {
   ];
 
   cardsInProgress = [
-    new KanbanCard('Fugiat ex est quis ut id duis nostrud incididunt elit officia exercitation laborum.'),
-    new KanbanCard('Voluptate excepteur id mollit dolor commodo pariatur est irure nostrud adipisicing duis enim.'),
-    new KanbanCard('Veniam tempor eiusmod laboris nisi nisi do anim aliquip sint exercitation duis adipisicing.')
+    new KanbanCard('Fugiat ex est quis ut id duis nostrud incididunt elit officia exercitation laborum.', KanbanState.IN_PROGRESS),
+    new KanbanCard('Voluptate excepteur id mollit dolor commodo pariatur est irure nostrud adipisicing duis enim.', KanbanState.IN_PROGRESS),
+    new KanbanCard('Veniam tempor eiusmod laboris nisi nisi do anim aliquip sint exercitation duis adipisicing.', KanbanState.IN_PROGRESS)
   ];
 
   cardsComplete = [

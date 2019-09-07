@@ -9,8 +9,10 @@
   </ion-header>
 
   <ion-content *ngIf="card">
-    <ion-select id="field-state" (ionBlur)="updateCardByTarget($event)"
-      value={{card.state}} interface="action-sheet">
+
+    <!-- <form #form="ngForm" (ngSubmit)="save(form)"> -->
+    <ion-select name="field-state" (ionBlur)="updateCardByTarget(event.target)"
+      interface="action-sheet" value={{card.state}} ngModel required>
       <ion-select-option value="todo">Todo</ion-select-option>
       <ion-select-option value="in-progress">In Progress
       </ion-select-option>
@@ -20,16 +22,23 @@
     <ion-card>
       <ion-card-header>
         <ion-card-title>
-          <ion-textarea autoGrow id="field-title" (ionBlur)="save($event)"
-            value="{{card.title}}">
+          <ion-textarea autoGrow name="field-title"
+            (ionBlur)="updateCardByTarget(event.target)" value="{{card.title}}"
+            ngModel required>
           </ion-textarea>
         </ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <ion-textarea autoGrow id="field-description" (ionBlur)="save($event)"
-          value="{{card.description}}">
+        <ion-textarea autoGrow name="field-description"
+          (ionBlur)="updateCardByTarget(event.target)"
+          value="{{card.description}}" ngModel required>
         </ion-textarea>
       </ion-card-content>
     </ion-card>
+    <!-- </form> -->
+
+    <!-- <p>{{card.title}}</p> -->
+    <!-- <p>State {{card.state}}</p> -->
+    <!-- <p>{{card.description}}</p> -->
   </ion-content>

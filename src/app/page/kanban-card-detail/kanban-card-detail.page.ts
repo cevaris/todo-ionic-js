@@ -9,7 +9,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class KanbanCardDetailPage implements OnInit {
 
-  @Input() card: KanbanCard;
+  card: KanbanCard;
 
   constructor(navParams: NavParams, public modalController: ModalController) {
     this.card = navParams.get('card');
@@ -19,31 +19,25 @@ export class KanbanCardDetailPage implements OnInit {
   ngOnInit() {
   }
 
-  dismiss() {
-    console.log('saving', this.card);
-    this.modalController.dismiss({
+  async dismiss() {
+    await console.log('saving', this.card);
+    await this.modalController.dismiss({
       'dismissed': true
     });
   }
 
   updateCardByTarget(target: HTMLTextAreaElement | HTMLInputElement) {
-    const newValue = target.value;
+    const newValue = target.value
 
-    switch (target.id) {
-      case 'field-title':
-        this.card.title = newValue;
-        break;
-      case 'field-description':
-        this.card.description = newValue;
-        break;
-      case 'field-state':
-        this.card.state = kanbanStateFromString(newValue);
-        break;
-      default:
-        break;
+    if (target.classList.contains('field-title')) {
+      this.card.title = newValue;
     }
-    
-    console.log('saving', this.card);
+    if (target.classList.contains('field-description')) {
+      this.card.description = newValue;
+    }
+    if (target.classList.contains('field-state')) {
+      this.card.state = kanbanStateFromString(newValue);
+    }
   }
 
 }
