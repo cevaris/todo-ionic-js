@@ -28,7 +28,7 @@ export class KanbanCardDetailPage implements OnInit {
       description: [this.card.description],
       state: [this.card.state],
     });
-    
+
 
     console.log('caught', this.card);
   }
@@ -38,10 +38,6 @@ export class KanbanCardDetailPage implements OnInit {
 
   async submit(card) {
     await console.log('saving', card);
-  }
-
-  async dismiss() {
-    await console.log('saving', this.card);
     await this.modalController.dismiss({
       'dismissed': true
     });

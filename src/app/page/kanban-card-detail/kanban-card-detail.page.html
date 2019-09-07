@@ -3,12 +3,8 @@
 
     <ion-header no-border>
       <ion-toolbar>
-        <ion-buttons slot="start">
-          <button ion-button type="submit"
-            [disabled]="!cardForm.valid">Submit</button>
-        </ion-buttons>
         <ion-buttons slot="end">
-          <ion-button (click)="dismiss()">
+          <ion-button type="submit" [disabled]="!cardForm.valid">
             <ion-icon name="close"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -26,10 +22,6 @@
       <ion-textarea autoGrow formControlName="title"></ion-textarea>
       <ion-textarea autoGrow formControlName="description"></ion-textarea>
 
-
-      <!-- <p>{{card.title}}</p> -->
-      <!-- <p>State {{card.state}}</p> -->
-      <!-- <p>{{card.description}}</p> -->
     </div>
   </form>
 </ion-content>
