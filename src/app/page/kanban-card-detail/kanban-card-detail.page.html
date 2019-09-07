@@ -1,4 +1,4 @@
-<form [formGroup]="cardForm" (ngSubmit)="submit(cardForm)">
+<form novalidate [formGroup]="cardForm" (ngSubmit)="submit(cardForm)">
 
   <ion-header>
     <ion-toolbar>
@@ -20,11 +20,28 @@
     <ion-label position="stacked">Title:</ion-label>
     <ion-textarea autoGrow formControlName="title"></ion-textarea>
   </ion-item>
+  <ion-text color="danger">
+    <ng-container *ngFor="let validation of validation_messages.title">
+      <div class="error-message"
+        *ngIf="cardForm.get('title').hasError(validation.type)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  </ion-text>
 
 
   <ion-item no-padding>
     <ion-label position="stacked">Description:</ion-label>
     <ion-textarea autoGrow formControlName="description"></ion-textarea>
   </ion-item>
+  <ion-text color="danger">
+    <ng-container *ngFor="let validation of validation_messages.description">
+      <div class="error-message"
+        *ngIf="cardForm.get('description').hasError(validation.type)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  </ion-text>
+
 
 </form>

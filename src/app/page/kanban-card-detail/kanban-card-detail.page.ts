@@ -9,12 +9,21 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./kanban-card-detail.page.scss'],
 })
 export class KanbanCardDetailPage implements OnInit {
-  private cardForm: FormGroup;
   private card: KanbanCard;
 
   title: String
   description: String
   state: KanbanState
+
+  cardForm: FormGroup;
+  validation_messages = {
+    'title': [
+      { type: 'required', message: 'Title is required.' },
+    ],
+    'description': [
+      { type: 'required', message: 'Description is required.' },
+    ],
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,10 +34,9 @@ export class KanbanCardDetailPage implements OnInit {
 
     this.cardForm = this.formBuilder.group({
       title: [this.card.title, Validators.required],
-      description: [this.card.description],
-      state: [this.card.state],
+      description: [this.card.description, Validators.required],
+      state: [this.card.state, Validators.required],
     });
-
 
     console.log('caught', this.card);
   }
