@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { KanbanCard, kanbanStateFromString } from 'src/app/data/models/kanban-card';
+import { KanbanCard, kanbanStateFromString, KanbanState } from 'src/app/data/models/kanban-card';
 import { ModalController, NavParams } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-kanban-card-detail',
@@ -8,15 +9,35 @@ import { ModalController, NavParams } from '@ionic/angular';
   styleUrls: ['./kanban-card-detail.page.scss'],
 })
 export class KanbanCardDetailPage implements OnInit {
+  private cardForm: FormGroup;
+  private card: KanbanCard;
 
-  card: KanbanCard;
+  title: String
+  description: String
+  state: KanbanState
 
-  constructor(navParams: NavParams, public modalController: ModalController) {
+  constructor(
+    private formBuilder: FormBuilder,
+    navParams: NavParams,
+    public modalController: ModalController
+  ) {
     this.card = navParams.get('card');
+
+    this.cardForm = this.formBuilder.group({
+      title: [this.card.title, Validators.required],
+      description: [this.card.description],
+      state: [this.card.state],
+    });
+    
+
     console.log('caught', this.card);
   }
 
   ngOnInit() {
+  }
+
+  async submit(card) {
+    await console.log('saving', card);
   }
 
   async dismiss() {

@@ -1,44 +1,35 @@
-  <ion-header no-border>
-    <ion-toolbar>
-      <ion-buttons slot="end">
-        <ion-button (click)="dismiss()">
-          <ion-icon name="close"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <form [formGroup]="cardForm" (ngSubmit)="submit(cardForm)">
 
-  <ion-content *ngIf="card">
+    <ion-header no-border>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <button ion-button type="submit"
+            [disabled]="!cardForm.valid">Submit</button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
 
-    <!-- <form #form="ngForm" (ngSubmit)="save(form)"> -->
-    <ion-select name="field-state" (ionBlur)="updateCardByTarget(event.target)"
-      interface="action-sheet" value={{card.state}} ngModel required>
-      <ion-select-option value="todo">Todo</ion-select-option>
-      <ion-select-option value="in-progress">In Progress
-      </ion-select-option>
-      <ion-select-option value="complete">Complete</ion-select-option>
-    </ion-select>
+    <div *ngIf="card">
+      <ion-select interface="action-sheet" formControlName="state">
+        <ion-select-option value="todo">Todo</ion-select-option>
+        <ion-select-option value="in-progress">In Progress
+        </ion-select-option>
+        <ion-select-option value="complete">Complete</ion-select-option>
+      </ion-select>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>
-          <ion-textarea autoGrow name="field-title"
-            (ionBlur)="updateCardByTarget(event.target)" value="{{card.title}}"
-            ngModel required>
-          </ion-textarea>
-        </ion-card-title>
-      </ion-card-header>
+      <ion-textarea autoGrow formControlName="title"></ion-textarea>
+      <ion-textarea autoGrow formControlName="description"></ion-textarea>
 
-      <ion-card-content>
-        <ion-textarea autoGrow name="field-description"
-          (ionBlur)="updateCardByTarget(event.target)"
-          value="{{card.description}}" ngModel required>
-        </ion-textarea>
-      </ion-card-content>
-    </ion-card>
-    <!-- </form> -->
 
-    <!-- <p>{{card.title}}</p> -->
-    <!-- <p>State {{card.state}}</p> -->
-    <!-- <p>{{card.description}}</p> -->
-  </ion-content>
+      <!-- <p>{{card.title}}</p> -->
+      <!-- <p>State {{card.state}}</p> -->
+      <!-- <p>{{card.description}}</p> -->
+    </div>
+  </form>
+</ion-content>
