@@ -17,10 +17,10 @@ export class KanbanCardDetailPage implements OnInit {
 
   cardForm: FormGroup;
   validation_messages = {
-    'title': [
+    title: [
       { type: 'required', message: 'Title is required.' },
     ],
-    'description': [
+    description: [
       { type: 'required', message: 'Description is required.' },
     ],
   }
@@ -31,7 +31,6 @@ export class KanbanCardDetailPage implements OnInit {
     public modalController: ModalController
   ) {
     this.card = navParams.get('card');
-
     this.cardForm = this.formBuilder.group({
       title: [this.card.title, Validators.required],
       description: [this.card.description, Validators.required],
@@ -50,19 +49,4 @@ export class KanbanCardDetailPage implements OnInit {
       'dismissed': true
     });
   }
-
-  updateCardByTarget(target: HTMLTextAreaElement | HTMLInputElement) {
-    const newValue = target.value
-
-    if (target.classList.contains('field-title')) {
-      this.card.title = newValue;
-    }
-    if (target.classList.contains('field-description')) {
-      this.card.description = newValue;
-    }
-    if (target.classList.contains('field-state')) {
-      this.card.state = kanbanStateFromString(newValue);
-    }
-  }
-
 }
