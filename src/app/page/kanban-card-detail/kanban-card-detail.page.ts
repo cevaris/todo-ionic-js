@@ -49,13 +49,5 @@ export class KanbanCardDetailPage implements OnInit {
       'dismissed': true
     });
   }
-
-  updateEditor(event) {
-    console.log(event);
-    if (event && event.target) {
-      var element = event.target;
-      element.style.height = element.scrollHeight + "px";
-    }
-
-  };
+  
 }
