@@ -1,3 +1,4 @@
+import {AutosizeModule} from 'ngx-autosize';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [AppComponent, KanbanCardDetailPage],
   entryComponents: [KanbanCardDetailPage],
   imports: [
+    AutosizeModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,

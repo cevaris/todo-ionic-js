@@ -9,12 +9,12 @@ import { KanbanCard, KanbanState } from 'src/app/data/models/kanban-card';
 export class KanbanPage implements OnInit {
 
   cardsTodo: KanbanCard[] = [
-    new KanbanCard('Ipsum anim ea duis dolore ut consequat exercitation sit ipsum.'),
-    new KanbanCard('Sunt eiusmod ex officia laboris sunt eu amet velit minim ullamco in.'),
-    new KanbanCard('Mollit labore consectetur minim sunt mollit exercitation velit commodo nisi minim aliquip amet in.'),
-    new KanbanCard('Lorem mollit ut est aliqua officia sunt officia eu anim.'),
-    new KanbanCard('Esse pariatur excepteur nostrud non excepteur sunt dolore consectetur aliqua.'),
-    new KanbanCard('Duis pariatur id commodo consectetur.')
+    new KanbanCard('Ipsum anim ea duis dolore ut consequat exercitation sit ipsum.', KanbanState.TODO),
+    new KanbanCard('Sunt eiusmod ex officia laboris sunt eu amet velit minim ullamco in.', KanbanState.TODO),
+    new KanbanCard('Mollit labore consectetur minim sunt mollit exercitation velit commodo nisi minim aliquip amet in.', KanbanState.TODO),
+    new KanbanCard('Lorem mollit ut est aliqua officia sunt officia eu anim.', KanbanState.TODO),
+    new KanbanCard('Esse pariatur excepteur nostrud non excepteur sunt dolore consectetur aliqua.', KanbanState.TODO),
+    new KanbanCard('Duis pariatur id commodo consectetur.', KanbanState.TODO)
   ];
 
   cardsInProgress = [
@@ -24,9 +24,9 @@ export class KanbanPage implements OnInit {
   ];
 
   cardsComplete = [
-    new KanbanCard('Nostrud et exercitation exercitation dolore id eu sint duis aute fugiat sint.'),
-    new KanbanCard('Dolor ad consectetur velit cupidatat deserunt ut elit reprehenderit veniam aliqua ea.'),
-    new KanbanCard('Ex laborum aute est esse ex sunt tempor laboris consectetur.')
+    new KanbanCard('Nostrud et exercitation exercitation dolore id eu sint duis aute fugiat sint.', KanbanState.COMPLETE),
+    new KanbanCard('Dolor ad consectetur velit cupidatat deserunt ut elit reprehenderit veniam aliqua ea.', KanbanState.COMPLETE),
+    new KanbanCard('Ex laborum aute est esse ex sunt tempor laboris consectetur.', KanbanState.COMPLETE)
   ];
 
   constructor() { }

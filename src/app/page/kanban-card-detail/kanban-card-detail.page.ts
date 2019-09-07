@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KanbanCard, kanbanStateFromString, KanbanState } from 'src/app/data/models/kanban-card';
 import { ModalController, NavParams } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-kanban-card-detail',
@@ -32,9 +32,9 @@ export class KanbanCardDetailPage implements OnInit {
   ) {
     this.card = navParams.get('card');
     this.cardForm = this.formBuilder.group({
-      title: [this.card.title, Validators.required],
-      description: [this.card.description, Validators.required],
-      state: [this.card.state, Validators.required],
+      title: new FormControl(this.card.title, Validators.required),
+      description: new FormControl(this.card.description, Validators.required),
+      state: new FormControl(this.card.state, Validators.required)
     });
 
     console.log('caught', this.card);
@@ -49,4 +49,13 @@ export class KanbanCardDetailPage implements OnInit {
       'dismissed': true
     });
   }
+
+  updateEditor(event) {
+    console.log(event);
+    if (event && event.target) {
+      var element = event.target;
+      element.style.height = element.scrollHeight + "px";
+    }
+
+  };
 }
