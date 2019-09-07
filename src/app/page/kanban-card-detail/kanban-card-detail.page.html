@@ -1,27 +1,30 @@
-<ion-content>
-  <form [formGroup]="cardForm" (ngSubmit)="submit(cardForm)">
+<form [formGroup]="cardForm" (ngSubmit)="submit(cardForm)">
 
-    <ion-header no-border>
-      <ion-toolbar>
-        <ion-buttons slot="end">
-          <ion-button type="submit" [disabled]="!cardForm.valid">
-            <ion-icon name="close"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-
-    <div *ngIf="card">
+  <ion-header>
+    <ion-toolbar>
       <ion-select interface="action-sheet" formControlName="state">
         <ion-select-option value="todo">Todo</ion-select-option>
         <ion-select-option value="in-progress">In Progress
         </ion-select-option>
         <ion-select-option value="complete">Complete</ion-select-option>
       </ion-select>
+      <ion-buttons slot="end">
+        <ion-button type="submit" [disabled]="!cardForm.valid">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-      <ion-textarea autoGrow formControlName="title"></ion-textarea>
-      <ion-textarea autoGrow formControlName="description"></ion-textarea>
+  <ion-item no-padding>
+    <ion-label position="stacked">Title:</ion-label>
+    <ion-textarea autoGrow formControlName="title"></ion-textarea>
+  </ion-item>
 
-    </div>
-  </form>
-</ion-content>
+
+  <ion-item no-padding>
+    <ion-label position="stacked">Description:</ion-label>
+    <ion-textarea autoGrow formControlName="description"></ion-textarea>
+  </ion-item>
+
+</form>
