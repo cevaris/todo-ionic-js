@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KanbanCard, KanbanState, newKanbanCard } from 'src/app/data/models/kanban-card';
 import { ModalController } from '@ionic/angular';
 import { KanbanCardDetailPage } from '../kanban-card-detail/kanban-card-detail.page';
+import { IKanbanCardService } from 'src/app/service/kanban-card.service';
 
 @Component({
   selector: 'app-kanban',
@@ -76,7 +77,9 @@ export class KanbanPage implements OnInit {
       KanbanState.COMPLETE)
   ];
 
-  constructor(public modalController: ModalController) { }
+  constructor(
+    public modalController: ModalController
+  ) { }
 
   ngOnInit() {
   }

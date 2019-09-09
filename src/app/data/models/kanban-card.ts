@@ -17,6 +17,7 @@ export class KanbanCard {
 
     constructor(title: String, description: String, state: KanbanState) {
         this.title = title;
+        this.description = description;
         this.state = state;
     }
 }

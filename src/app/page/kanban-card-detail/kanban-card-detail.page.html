@@ -2,14 +2,13 @@
 
   <ion-header>
     <ion-toolbar>
-      <ion-select interface="action-sheet" formControlName="state">
-        <ion-select-option value="todo">Todo</ion-select-option>
-        <ion-select-option value="in-progress">In Progress
-        </ion-select-option>
-        <ion-select-option value="complete">Complete</ion-select-option>
-      </ion-select>
+      <ion-buttons slot="start">
+        <ion-button type="color" color="primary" [disabled]="!cardForm.valid">
+          Save
+        </ion-button>
+      </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button type="submit" [disabled]="!cardForm.valid">
+        <ion-button type="color" color="danger">
           <ion-icon name="close"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -30,7 +29,6 @@
     </ng-container>
   </ion-text>
 
-
   <ion-item no-padding>
     <ion-label position="stacked">Description:</ion-label>
     <ion-textarea autosize formControlName="description">
@@ -45,5 +43,14 @@
     </ng-container>
   </ion-text>
 
+  <ion-item no-padding>
+    <ion-label position="stacked">State:</ion-label>
+    <ion-select interface="action-sheet" formControlName="state">
+      <ion-select-option value="todo">Todo</ion-select-option>
+      <ion-select-option value="in-progress">In Progress
+      </ion-select-option>
+      <ion-select-option value="complete">Complete</ion-select-option>
+    </ion-select>
+  </ion-item>
 
 </form>
