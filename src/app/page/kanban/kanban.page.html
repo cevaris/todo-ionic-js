@@ -4,12 +4,18 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Kanban</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="newCard()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-slides [options]="{slidesPerView: 1.5, centeredSlides: true, slidesPerView: 'auto'}">
+  <ion-slides
+    [options]="{slidesPerView: 1.5, centeredSlides: true, slidesPerView: 'auto'}">
 
     <ion-slide>
       <div>
