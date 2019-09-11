@@ -18,11 +18,11 @@
     [options]="{slidesPerView: 1.5, centeredSlides: true, slidesPerView: 'auto'}">
 
     <ion-slide>
-      <div>
+      <div *ngIf="cardsTodo$ | async as cardsTodo">
         <h1>Todo</h1>
         <ion-list lines="none">
-          <ion-item *ngFor="let cardT of cardsTodo">
-            <app-kanban-card [card]="cardT"></app-kanban-card>
+          <ion-item *ngFor="let card of cardsTodo">
+            <app-kanban-card [card]="card"></app-kanban-card>
           </ion-item>
         </ion-list>
       </div>
@@ -30,11 +30,11 @@
 
 
     <ion-slide>
-      <div>
+      <div *ngIf="cardsInProgress$ | async as cardsInProgress">
         <h1>In Progress</h1>
         <ion-list lines="none">
-          <ion-item *ngFor="let cardIP of cardsInProgress">
-            <app-kanban-card [card]="cardIP"></app-kanban-card>
+          <ion-item *ngFor="let card of cardsInProgress">
+            <app-kanban-card [card]="card"></app-kanban-card>
           </ion-item>
         </ion-list>
       </div>
@@ -42,11 +42,11 @@
 
 
     <ion-slide>
-      <div>
+      <div *ngIf="cardsComplete$ | async as cardsComplete">
         <h1>Complete</h1>
         <ion-list lines="none">
-          <ion-item *ngFor="let cardC of cardsComplete">
-            <app-kanban-card [card]="cardC"></app-kanban-card>
+          <ion-item *ngFor="let card of cardsComplete">
+            <app-kanban-card [card]="card"></app-kanban-card>
           </ion-item>
         </ion-list>
       </div>

@@ -3,7 +3,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-button type="color" color="primary" [disabled]="!cardForm.valid">
+      <ion-button type="color" color="primary" [disabled]="!cardForm.valid">
           Save
         </ion-button>
       </ion-buttons>
@@ -14,6 +14,8 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+  <input type="hidden" formControlName="id">
 
   <ion-item no-padding>
     <ion-label position="stacked">Title:</ion-label>

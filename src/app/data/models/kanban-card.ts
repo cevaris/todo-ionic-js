@@ -11,11 +11,13 @@ export interface IKanbanCard {
 }
 
 export class KanbanCard {
+    id: String;
     title: String
     state: KanbanState
     description: String;
 
-    constructor(title: String, description: String, state: KanbanState) {
+    constructor(id: String, title: String, description: String, state: KanbanState) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.state = state;
@@ -36,5 +38,5 @@ export function kanbanStateFromString(str: string): KanbanState {
 }
 
 export function newKanbanCard(): KanbanCard {
-    return new KanbanCard('', '', KanbanState.TODO)
+    return new KanbanCard(null, '', '', KanbanState.TODO)
 }

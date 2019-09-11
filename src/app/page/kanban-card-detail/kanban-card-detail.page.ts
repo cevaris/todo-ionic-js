@@ -12,10 +12,6 @@ import { IKanbanCardService } from 'src/app/service/kanban-card.service';
 export class KanbanCardDetailPage implements OnInit {
   private card: KanbanCard;
 
-  title: String
-  description: String
-  state: KanbanState
-
   cardForm: FormGroup;
   validation_messages = {
     title: [
@@ -34,8 +30,9 @@ export class KanbanCardDetailPage implements OnInit {
   ) {
     this.card = navParams.get('card');
     this.cardForm = this.formBuilder.group({
+      description: new FormControl(this.card.description),
+      id: new FormControl(this.card.id),
       title: new FormControl(this.card.title, Validators.required),
-      description: new FormControl(this.card.description, Validators.required),
       state: new FormControl(this.card.state, Validators.required)
     });
 
@@ -46,9 +43,14 @@ export class KanbanCardDetailPage implements OnInit {
   }
 
   async submit(formArray: FormArray) {
-    await this.service.save(formArray.value);
-    await this.modalController.dismiss({
-      'dismissed': true
-    });
+    try {
+      await this.service.save(formArray.value).toPromise();
+      await this.modalController.dismiss({
+        'dismissed': true
+      });
+    } catch (err) {
+      console.error(err);
+    }
+
   }
 }
