@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { KanbanCard, KanbanState, newKanbanCard } from 'src/app/data/models/kanban-card';
 import { ModalController } from '@ionic/angular';
-import { KanbanCardDetailPage } from '../kanban-card-detail/kanban-card-detail.page';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { KanbanCard, KanbanState, newKanbanCard } from 'src/app/data/models/kanban-card';
 import { IKanbanCardService } from 'src/app/service/kanban-card.service';
-import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { KanbanCardDetailPage } from '../kanban-card-detail/kanban-card-detail.page';
 
 @Component({
   selector: 'app-kanban',
@@ -13,27 +13,25 @@ import { filter, map } from 'rxjs/operators';
 })
 export class KanbanPage implements OnInit {
 
-  cardsTodo$: Observable<KanbanCard[]>;
-  cardsInProgress$: Observable<KanbanCard[]>;
-  cardsComplete$: Observable<KanbanCard[]>;
+  cardsTodo: KanbanCard[];
+  cardsInProgress: KanbanCard[];
+  cardsComplete: KanbanCard[];
 
   constructor(
     private service: IKanbanCardService,
     public modalController: ModalController,
   ) {
-    const cards$: Observable<KanbanCard[]> = service.get()
-
-    this.cardsTodo$ = cards$.pipe(
-      map((cards: KanbanCard[]) => cards.filter(card => card.state === KanbanState.TODO))
-    );
-
-    this.cardsInProgress$ = cards$.pipe(
-      map((cards: KanbanCard[]) => cards.filter(card => card.state === KanbanState.IN_PROGRESS))
-    );
-
-    this.cardsComplete$ = cards$.pipe(
-      map((cards: KanbanCard[]) => cards.filter(card => card.state === KanbanState.COMPLETE))
-    );
+    this.service.observable()
+      .pipe(
+        tap((cards: KanbanCard[]) => console.log('readAll response', cards)),
+        tap((cards: KanbanCard[]) =>
+          this.cardsTodo = cards.filter(card => card.state === KanbanState.TODO)),
+        tap((cards: KanbanCard[]) =>
+          this.cardsInProgress = cards.filter(card => card.state === KanbanState.IN_PROGRESS)),
+        tap((cards: KanbanCard[]) =>
+          this.cardsComplete = cards.filter(card => card.state === KanbanState.COMPLETE)),
+      );
+    this.service.readAll();
   }
 
   ngOnInit() {
@@ -49,6 +47,12 @@ export class KanbanPage implements OnInit {
           card: newKanbanCard()
         }
       });
+
+    // modal.onDidDismiss().then((detail: OverlayEventDetail) => {
+    //   if (detail !== null) {
+    //     console.log('The result:', detail.data);
+    //   }
+    // });
 
     await modal.present();
   }

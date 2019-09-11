@@ -18,7 +18,7 @@
     [options]="{slidesPerView: 1.5, centeredSlides: true, slidesPerView: 'auto'}">
 
     <ion-slide>
-      <div *ngIf="cardsTodo$ | async as cardsTodo">
+      <div *ngIf="cardsTodo">
         <h1>Todo</h1>
         <ion-list lines="none">
           <ion-item *ngFor="let card of cardsTodo">
@@ -30,7 +30,7 @@
 
 
     <ion-slide>
-      <div *ngIf="cardsInProgress$ | async as cardsInProgress">
+      <div *ngIf="cardsInProgress">
         <h1>In Progress</h1>
         <ion-list lines="none">
           <ion-item *ngFor="let card of cardsInProgress">
@@ -42,7 +42,7 @@
 
 
     <ion-slide>
-      <div *ngIf="cardsComplete$ | async as cardsComplete">
+      <div *ngIf="cardsComplete">
         <h1>Complete</h1>
         <ion-list lines="none">
           <ion-item *ngFor="let card of cardsComplete">

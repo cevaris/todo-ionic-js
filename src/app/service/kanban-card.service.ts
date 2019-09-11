@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Observable, of, BehaviorSubject, } from 'rxjs';
 import { KanbanCard, KanbanState } from '../data/models/kanban-card';
-import { Observable } from 'rxjs';
-import { of, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 export abstract class IKanbanCardService {
-  abstract save(card: KanbanCard): Observable<Boolean>;
-  abstract get(): Observable<KanbanCard[]>;
+  abstract observable(): Observable<KanbanCard[]>;
+  abstract write(card: KanbanCard): void;
+  abstract readAll(): void;
 }
 
 /**
@@ -91,34 +90,45 @@ const dummyData: KanbanCard[] = [
   providedIn: 'root'
 })
 export class KanbanCardService implements IKanbanCardService {
-  private store$: Observable<KanbanCard[]>;
+  private subject = new BehaviorSubject<KanbanCard[]>([]);
+  private data: KanbanCard[] = dummyData;
 
   constructor() {
-    this.store$ = of(dummyData);
   }
 
-  get(): Observable<KanbanCard[]> {
-    return this.store$;
+  observable(): Observable<KanbanCard[]> {
+    return this.subject.asObservable();
   }
 
-  save(card: KanbanCard): Observable<Boolean> {
-    console.log('saving card', card);
+  readAll(): void {
+    of(this.data)
+      .subscribe(data => {
+        console.log('readAll');
+        this.data = data;
+        this.subject.next(this.data);
+        console.log('next state set', this.data);
+      });
+  }
 
-    return this.store$.pipe(
-      map((store: KanbanCard[]) => {
-        const oldCardIdx = store.findIndex((c: KanbanCard) => c.id === card.id);
+  write(card: KanbanCard): void {
+    of(this.data)
+      .subscribe(data => {
+        this.data = data;
+
+        console.log('saving card', card);
+        const oldCardIdx = this.data.findIndex((c: KanbanCard) => c.id === card.id);
         // console.log(oldCardIdx, store.map(c => c.id));
         if (oldCardIdx >= 0) {
-          store[oldCardIdx] = card;
+          this.data[oldCardIdx] = card;
           console.log('updated', card.id);
-          return true;
         } else {
           card.id = newId(4);
           console.log('created', card.id);
-          store.push(card);
+          this.data.push(card);
         }
-      })
-    );
+
+        this.subject.next(this.data)
+      });
   }
 }
 
