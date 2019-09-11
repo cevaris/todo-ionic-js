@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KanbanCard } from 'src/app/data/models/kanban-card';
 
 @Component({
   selector: 'app-search',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+
+  cards: KanbanCard[]
 
   constructor() { }
 

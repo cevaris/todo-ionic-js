@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -8,20 +7,18 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AutosizeModule } from 'ngx-autosize';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { KanbanCardDetailPage } from './page/kanban-card-detail/kanban-card-detail.page';
-import { InMemoryKanbanCardService, IKanbanCardService } from './service/kanban-card.service';
-
+import { IKanbanCardService, InMemoryKanbanCardService } from './service/kanban-card.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, KanbanCardDetailPage],
-  entryComponents: [KanbanCardDetailPage],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
     AutosizeModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
+    SharedModule
   ],
   providers: [
     StatusBar,
@@ -29,6 +26,6 @@ import { InMemoryKanbanCardService, IKanbanCardService } from './service/kanban-
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: IKanbanCardService, useClass: InMemoryKanbanCardService },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

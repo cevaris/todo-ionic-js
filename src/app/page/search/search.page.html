@@ -12,4 +12,10 @@
   <ion-searchbar animated debounce="500" (ionInput)="onInput($event)">
   </ion-searchbar>
 
+  <ion-list lines="none">
+    <ion-item *ngFor="let card of cards">
+      <app-kanban-card [card]="card"></app-kanban-card>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
