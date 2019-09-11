@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AutosizeModule } from 'ngx-autosize';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { KanbanCardDetailPageModule } from './page/kanban-card-detail/kanban-card-detail.module';
 import { IKanbanCardService, InMemoryKanbanCardService } from './service/kanban-card.service';
 import { SharedModule } from './shared/shared.module';
 
@@ -18,7 +19,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    KanbanCardDetailPageModule,
   ],
   providers: [
     StatusBar,

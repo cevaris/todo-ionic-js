@@ -23,6 +23,7 @@ const routes: Routes = [
     FormsModule,
     SharedModule,
   ],
-  declarations: [KanbanCardDetailPage]
+  declarations: [KanbanCardDetailPage],
+  entryComponents: [KanbanCardDetailPage]
 })
 export class KanbanCardDetailPageModule { }
