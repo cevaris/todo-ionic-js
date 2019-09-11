@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject, } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { KanbanCard, KanbanState } from '../data/models/kanban-card';
 
 export abstract class IKanbanCardService {
   abstract observable(): Observable<KanbanCard[]>;
   abstract write(card: KanbanCard): Promise<void>;
   abstract readAll(): void;
+  abstract filter(query: string): void;
 }
 
 /**
@@ -96,6 +97,20 @@ export class InMemoryKanbanCardService implements IKanbanCardService {
   constructor() {
     this.subject = new BehaviorSubject<KanbanCard[]>([]);
     this.data = initialData;
+  }
+
+  filter(query: string): void {
+    if (query && query.trim()) {
+      query = query.toLowerCase();
+      const filteredCards = this.data.filter(
+        c => c.title.toLowerCase().includes(query) ||
+          c.description.toLowerCase().includes(query) ||
+          c.state.toString().toLowerCase().includes(query)
+      );
+
+      this.subject.next(filteredCards);
+    }
+
   }
 
   observable(): Observable<KanbanCard[]> {
