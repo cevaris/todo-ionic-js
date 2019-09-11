@@ -11,7 +11,7 @@ export abstract class IKanbanCardService {
 /**
  * Mock data until we have a real database setup
  */
-const dummyData: KanbanCard[] = [
+const initialData: KanbanCard[] = [
   new KanbanCard(
     newId(4),
     'Ipsum anim ea duis dolore ut consequat exercitation sit ipsum.',
@@ -89,13 +89,13 @@ const dummyData: KanbanCard[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class KanbanCardService implements IKanbanCardService {
+export class InMemoryKanbanCardService implements IKanbanCardService {
   private subject: BehaviorSubject<KanbanCard[]>;
   private data: KanbanCard[];
 
   constructor() {
     this.subject = new BehaviorSubject<KanbanCard[]>([]);
-    this.data = dummyData;
+    this.data = initialData;
   }
 
   observable(): Observable<KanbanCard[]> {

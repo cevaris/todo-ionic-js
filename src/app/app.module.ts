@@ -9,7 +9,7 @@ import { AutosizeModule } from 'ngx-autosize';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KanbanCardDetailPage } from './page/kanban-card-detail/kanban-card-detail.page';
-import { KanbanCardService, IKanbanCardService } from './service/kanban-card.service';
+import { InMemoryKanbanCardService, IKanbanCardService } from './service/kanban-card.service';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { KanbanCardService, IKanbanCardService } from './service/kanban-card.ser
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: IKanbanCardService, useClass: KanbanCardService },
+    { provide: IKanbanCardService, useClass: InMemoryKanbanCardService },
   ],
   bootstrap: [AppComponent]
 })
