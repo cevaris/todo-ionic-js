@@ -4,7 +4,7 @@ import { KanbanCard, KanbanState } from '../data/models/kanban-card';
 
 export abstract class IKanbanCardService {
   abstract observable(): Observable<KanbanCard[]>;
-  abstract write(card: KanbanCard): void;
+  abstract write(card: KanbanCard): Promise<void>;
   abstract readAll(): void;
 }
 
@@ -90,10 +90,12 @@ const dummyData: KanbanCard[] = [
   providedIn: 'root'
 })
 export class KanbanCardService implements IKanbanCardService {
-  private subject = new BehaviorSubject<KanbanCard[]>([]);
-  private data: KanbanCard[] = dummyData;
+  private subject: BehaviorSubject<KanbanCard[]>;
+  private data: KanbanCard[];
 
   constructor() {
+    this.subject = new BehaviorSubject<KanbanCard[]>([]);
+    this.data = dummyData;
   }
 
   observable(): Observable<KanbanCard[]> {
@@ -101,34 +103,23 @@ export class KanbanCardService implements IKanbanCardService {
   }
 
   readAll(): void {
-    of(this.data)
-      .subscribe(data => {
-        console.log('readAll');
-        this.data = data;
-        this.subject.next(this.data);
-        console.log('next state set', this.data);
-      });
+    this.subject.next(this.data);
   }
 
-  write(card: KanbanCard): void {
-    of(this.data)
-      .subscribe(data => {
-        this.data = data;
-
-        console.log('saving card', card);
-        const oldCardIdx = this.data.findIndex((c: KanbanCard) => c.id === card.id);
-        // console.log(oldCardIdx, store.map(c => c.id));
-        if (oldCardIdx >= 0) {
-          this.data[oldCardIdx] = card;
-          console.log('updated', card.id);
-        } else {
-          card.id = newId(4);
-          console.log('created', card.id);
-          this.data.push(card);
-        }
-
-        this.subject.next(this.data)
-      });
+  write(card: KanbanCard): Promise<void> {
+    console.log('saving card', card);
+    const oldCardIdx = this.data.findIndex((c: KanbanCard) => c.id === card.id);
+    // console.log(oldCardIdx, store.map(c => c.id));
+    if (oldCardIdx >= 0) {
+      this.data[oldCardIdx] = card;
+      console.log('updated', card.id);
+    } else {
+      card.id = newId(4);
+      console.log('created', card.id);
+      this.data.push(card);
+    }
+    this.subject.next(this.data)
+    return Promise.resolve();
   }
 }
 

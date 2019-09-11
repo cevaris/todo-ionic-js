@@ -44,7 +44,7 @@ export class KanbanCardDetailPage implements OnInit {
 
   async submit(formArray: FormArray) {
     try {
-      await this.service.save(formArray.value).toPromise();
+      await this.service.write(formArray.value);
       await this.modalController.dismiss({
         'dismissed': true
       });

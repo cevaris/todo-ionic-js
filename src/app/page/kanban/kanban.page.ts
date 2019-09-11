@@ -13,6 +13,8 @@ import { KanbanCardDetailPage } from '../kanban-card-detail/kanban-card-detail.p
 })
 export class KanbanPage implements OnInit {
 
+  private subscription: Subscription;
+
   cardsTodo: KanbanCard[];
   cardsInProgress: KanbanCard[];
   cardsComplete: KanbanCard[];
@@ -21,20 +23,21 @@ export class KanbanPage implements OnInit {
     private service: IKanbanCardService,
     public modalController: ModalController,
   ) {
-    this.service.observable()
-      .pipe(
-        tap((cards: KanbanCard[]) => console.log('readAll response', cards)),
-        tap((cards: KanbanCard[]) =>
-          this.cardsTodo = cards.filter(card => card.state === KanbanState.TODO)),
-        tap((cards: KanbanCard[]) =>
-          this.cardsInProgress = cards.filter(card => card.state === KanbanState.IN_PROGRESS)),
-        tap((cards: KanbanCard[]) =>
-          this.cardsComplete = cards.filter(card => card.state === KanbanState.COMPLETE)),
-      );
+    this.subscription = this.service.observable()
+      .subscribe((cards) => {
+        this.cardsTodo = cards.filter(card => card.state === KanbanState.TODO);
+        this.cardsInProgress = cards.filter(card => card.state === KanbanState.IN_PROGRESS);
+        this.cardsComplete = cards.filter(card => card.state === KanbanState.COMPLETE);
+      });
+
     this.service.readAll();
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
   async newCard() {
@@ -47,12 +50,6 @@ export class KanbanPage implements OnInit {
           card: newKanbanCard()
         }
       });
-
-    // modal.onDidDismiss().then((detail: OverlayEventDetail) => {
-    //   if (detail !== null) {
-    //     console.log('The result:', detail.data);
-    //   }
-    // });
 
     await modal.present();
   }
